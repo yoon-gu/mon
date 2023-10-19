@@ -2,8 +2,8 @@ import json
 import os
 import random
 
-TEMPLATE = "\item  \opadd[resultstyle=\placeholder,carrystyle=\color{{white}},displayintermediary=None,voperation=top,voperator=bottom]{{{input1}}}{{{input2}}}"
-MULT_TEMPLATE = "\item  \opmul[resultstyle=\placeholder,carrystyle=\color{{white}},displayintermediary=None,voperation=top,voperator=bottom]{{{input1}}}{{{input2}}}"
+TEMPLATE = "\item  \opadd[resultstyle=\placeholder,carryadd=false,displayintermediary=None,voperation=top,voperator=bottom]{{{input1}}}{{{input2}}}"
+MULT_TEMPLATE = "\item  \opmul[resultstyle=\placeholder,carryadd=false,displayintermediary=None,voperation=top,voperator=bottom]{{{input1}}}{{{input2}}}"
 def add_problem(lower, upper):
     input1 = random.randint(lower, upper)
     input2 = random.randint(lower, upper)

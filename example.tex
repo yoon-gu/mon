@@ -8,6 +8,7 @@
 \usepackage{xlop}
 \usepackage{longdivision}
 \usepackage{multicol}
+\renewcommand{\familydefault}{\sfdefault}
 \newcommand\placeholder[1]{}
 \newcommand\placeholders[1]{\scriptsize$\square$}
 
@@ -16,8 +17,8 @@
 \makeatletter                 % Define standard pagestyle
 \makeevenfoot{standard}{}{}{} %
 \makeoddfoot{standard}{}{}{}  %
-\makeevenhead{standard}{\scriptsize\bfseries\thepage\scriptsize\qquad\small\leftmark}{}{}
-\makeoddhead{standard}{}{}{\scriptsize\rightmark\qquad\bfseries\thepage}
+\makeevenhead{standard}{\scriptsize\thepage\scriptsize\qquad\small\leftmark}{}{}
+\makeoddhead{standard}{}{}{\scriptsize\rightmark\qquad\thepage}
 \makeheadrule{standard}{\textwidth}{\normalrulethickness}
 
 \makepagestyle{chap} % Make new chapter pagestyle
@@ -34,12 +35,13 @@
 \pagestyle{standard}               % Choosing pagestyle and chapter pagestyle
 \aliaspagestyle{chapter}{chap} %
 
+\chapterstyle{ger}
 \title{황-구몬학습}
 
 \begin{document}
 \maketitle
 % \longdivision{350}{5}
-\chapter{더하기}
+\chapter{덧셈}
 계산을 하시오.
 \begin{multicols}{2}
     \begin{enumerate}[label=\scriptsize{(\arabic*)}]
@@ -47,7 +49,7 @@
     \end{enumerate}    
 \end{multicols}
 
-\chapter{곱하기}
+\chapter{곱셈}
 계산을 하시오.
 \begin{multicols}{2}
     \begin{enumerate}[label=\scriptsize{(\arabic*)}]
