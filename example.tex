@@ -11,6 +11,29 @@
 \newcommand\placeholder[1]{}
 \newcommand\placeholders[1]{\scriptsize$\square$}
 
+\makepagestyle{standard} % Make standard pagestyle
+
+\makeatletter                 % Define standard pagestyle
+\makeevenfoot{standard}{}{}{} %
+\makeoddfoot{standard}{}{}{}  %
+\makeevenhead{standard}{\scriptsize\bfseries\thepage\scriptsize\qquad\small\leftmark}{}{}
+\makeoddhead{standard}{}{}{\scriptsize\rightmark\qquad\bfseries\thepage}
+\makeheadrule{standard}{\textwidth}{\normalrulethickness}
+
+\makepagestyle{chap} % Make new chapter pagestyle
+
+\makeatletter
+\makeevenfoot{chap}{}{}{} % Define new chapter pagestyle
+\makeoddfoot{chap}{}{}{}  %
+\makeevenhead{chap}{}{}{}   %
+\makeoddhead{chap}{}{}{}    %
+\makeheadrule{chap}{\textwidth}{\normalrulethickness}
+\makeatother
+
+\nouppercaseheads
+\pagestyle{standard}               % Choosing pagestyle and chapter pagestyle
+\aliaspagestyle{chapter}{chap} %
+
 \title{황-구몬학습}
 
 \begin{document}
