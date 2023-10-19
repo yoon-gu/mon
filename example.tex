@@ -1,0 +1,18 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{kotex}
+\usepackage{xcolor}
+\usepackage{xlop}
+\usepackage{multicol}
+\newcommand\placeholder[1]{\large$\square$}
+\newcommand\placeholders[1]{\scriptsize$\square$}
+\begin{document}
+
+\begin{multicols}{3}
+    \begin{enumerate}[label=\textbf{(\arabic*)}]
+        \include{add_problem.tex}
+    \end{enumerate}    
+\end{multicols}
+
+\end{document}​
