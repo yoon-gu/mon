@@ -1,0 +1,46 @@
+\documentclass[17pt, twoside, openright, showtrims, a3paper]{memoir}
+\author{황윤구}
+% \usepackage[a5paper,margin=1in]{geometry}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{kotex}
+\usepackage{xcolor}
+\usepackage{xlop}
+\usepackage{longdivision}
+\usepackage{multicol}
+\renewcommand{\familydefault}{\sfdefault}
+\newcommand\placeholder[1]{}
+\newcommand\placeholders[1]{\scriptsize$\square$}
+
+\makepagestyle{standard} % Make standard pagestyle
+
+\makeatletter                 % Define standard pagestyle
+\makeevenfoot{standard}{}{}{} %
+\makeoddfoot{standard}{}{}{}  %
+\makeevenhead{standard}{\scriptsize\thepage\scriptsize\qquad\small\leftmark}{}{}
+\makeoddhead{standard}{}{}{\scriptsize\rightmark\qquad\thepage}
+\makeheadrule{standard}{\textwidth}{\normalrulethickness}
+
+\makepagestyle{chap} % Make new chapter pagestyle
+
+\makeatletter
+\makeevenfoot{chap}{}{}{} % Define new chapter pagestyle
+\makeoddfoot{chap}{}{}{}  %
+\makeevenhead{chap}{}{}{}   %
+\makeoddhead{chap}{}{}{}    %
+\makeheadrule{chap}{\textwidth}{\normalrulethickness}
+\makeatother
+
+\nouppercaseheads
+\pagestyle{standard}               % Choosing pagestyle and chapter pagestyle
+\aliaspagestyle{chapter}{chap} %
+
+\chapterstyle{ger}
+\title{황-구몬학습}
+
+\begin{document}
+% \maketitle
+% \longdivision{350}{5}
+\include{chapters.tex}
+
+\end{document}​

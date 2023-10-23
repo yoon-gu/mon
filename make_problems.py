@@ -4,7 +4,8 @@ import json
 import os
 import random
 
-TEMPLATE = "\item  \opadd[resultstyle=\placeholder,carryadd=false,displayintermediary=None,voperation=top,voperator=bottom]{{{input1}}}{{{input2}}}"
+ADD_TEMPLATE = "\item  \opadd[resultstyle=\placeholder,carryadd=false,displayintermediary=None,voperation=top,voperator=bottom]{{{input1}}}{{{input2}}}"
+SUBT_TEMPLATE = "\item  \opsub[resultstyle=\placeholder,carrysub=false,displayintermediary=None,voperation=top,voperator=bottom]{{{input1}}}{{{input2}}}"
 MULT_TEMPLATE = "\item  \opmul[resultstyle=\placeholder,carryadd=false,voperation=top,voperator=bottom]{{{input1}}}{{{input2}}}"
 def add_problem(lower, upper):
     input1 = random.randint(lower, upper)
@@ -14,7 +15,7 @@ def add_problem(lower, upper):
 
 def subtract_problem(lower, upper):
     input1 = random.randint(lower, upper)
-    input2 = -random.randint(lower, upper)
+    input2 = random.randint(lower, upper)
     solution = input1 + input2
     return {"input1": input1, "input2": input2, "solution": solution}
 
@@ -24,8 +25,8 @@ def multiply_problem(lower, upper):
     solution = input1 + input2
     return {"input1": input1, "input2": input2, "solution": solution}
 
-problem_set = {"더하기": (add_problem, TEMPLATE),
-               "빼기": (subtract_problem, TEMPLATE),
+problem_set = {"더하기": (add_problem, ADD_TEMPLATE),
+               "빼기": (subtract_problem, SUBT_TEMPLATE),
                "곱하기": (multiply_problem, MULT_TEMPLATE)}
 
 @click.command()

@@ -1,16 +1,24 @@
 import os
+import time
 import subprocess
 import gradio as gr
 from make_problems import problem_set
 from copy import deepcopy
 
 types = gr.Dropdown(["더하기", "빼기", "곱하기"], value=["더하기", "빼기", "곱하기"], label="Problem Type", multiselect=True)
-lower = gr.Slider(minimum=1, maximum=10000, step=1, value=1000, label="Lower Bound")
-upper = gr.Slider(minimum=1, maximum=10000, step=1, value=9999, label="Upper Bound")
-num_problems = gr.Slider(minimum=1, maximum=100, step=1, value=30, label="Number of Problems")
+lower = gr.Slider(minimum=1, maximum=10000, step=1, value=1, label="Lower Bound")
+upper = gr.Slider(minimum=1, maximum=10000, step=1, value=99, label="Upper Bound")
+num_problems = gr.Slider(minimum=1, maximum=100, step=1, value=20, label="Number of Problems")
 
 
 def greet(type, lower, upper, num_problems):
+    if os.path.exists("problem.pdf"):
+        os.remove("problem.pdf")
+    if os.path.exists("solution.pdf"):
+        os.remove("solution.pdf")
+    if os.path.exists("example.pdf"):
+        os.remove("example.pdf")
+
     with open("chapter_template.tex", "r") as f:
         template = f.read()
 
@@ -30,15 +38,11 @@ def greet(type, lower, upper, num_problems):
     with open('chapters.tex', 'w') as f:
         f.write(all_chapter_str)
 
-    r = subprocess.check_call(['pdflatex', 'example.tex'])
-    r = subprocess.check_call(['cp', 'example.pdf', 'problem.pdf'])
-
+    r = subprocess.check_call(['pdflatex', 'problem.tex'])
     all_chapter_str_sol = deepcopy(all_chapter_str)
     with open('chapters.tex', 'w') as f:
-        f.write(all_chapter_str_sol.replace("resultstyle=\placeholder,", "").replace("carryadd=false","carryadd=true"))
-    r = subprocess.check_call(['pdflatex', 'example.tex'])
-    r = subprocess.check_call(['cp', 'example.pdf', 'solution.pdf'])
-    # res = subprocess.check_call([f"python make_problems.py --num_problems {num_problems} --lower {lower} --upper {upper} --ptype {type}"], shell=True)
+        f.write(all_chapter_str_sol.replace("resultstyle=\placeholder,", "").replace("carryadd=false","carryadd=true").replace("carrysub=false","carrysub=true"))
+    r = subprocess.check_call(['pdflatex', 'solution.tex'])
     return ["problem.pdf", "solution.pdf"]
 
 iface = gr.Interface(fn=greet, inputs=[types, lower, upper, num_problems], outputs="file")
