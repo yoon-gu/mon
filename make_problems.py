@@ -1,4 +1,5 @@
 import click
+import subprocess
 import json
 import os
 import random
@@ -17,39 +18,30 @@ def multiply_problem(lower, upper):
     solution = input1 + input2
     return {"input1": input1, "input2": input2, "solution": solution}
 
+problem_set = {"더하기": (add_problem, TEMPLATE), "곱하기": (multiply_problem, MULT_TEMPLATE)}
+
 @click.command()
 @click.option('--num_problems', default=10)
 @click.option('--lower', default=1)
 @click.option('--upper', default=10000)
-def main(num_problems, lower, upper):
-    add_problems = []
+@click.option('--ptype', default="addition")
+def main(num_problems, lower, upper, ptype):
+    pfunc, template = problem_set[ptype]
+    problems = []
     for _ in range(num_problems):
-        add_problems.append(TEMPLATE.format_map(add_problem(lower, upper)))
+        problems.append(template.format_map(pfunc(lower, upper)))
 
-    with open('add_problem.tex', 'w') as f:
-        f.write('\n'.join(add_problems))
+    with open('problems_list.tex', 'w') as f:
+        f.write('\n'.join(problems))
 
-    mul_problems = []
-    for _ in range(num_problems):
-        mul_problems.append(MULT_TEMPLATE.format_map(multiply_problem(lower, upper)))
+    r = subprocess.check_call(['pdflatex', 'example.tex'])
+    r = subprocess.check_call(['cp', 'example.pdf', 'problem.pdf'])
 
-    with open('multiply_problem.tex', 'w') as f:
-        f.write('\n'.join(mul_problems))
+    with open('problems_list.tex', 'w') as f:
+        f.write('\n'.join([p.replace("resultstyle=\placeholder,", "").replace("carryadd=false","carryadd=true") for p in problems]))
 
-    os.system('pdflatex example.tex')
-    import time
-    time.sleep(1)
-    os.system('cp example.pdf problem.pdf')
-
-    with open('add_problem.tex', 'w') as f:
-        f.write('\n'.join([p.replace("resultstyle=\placeholder,", "").replace("carryadd=false","carryadd=true") for p in add_problems]))
-
-    with open('multiply_problem.tex', 'w') as f:
-        f.write('\n'.join([p.replace("resultstyle=\placeholder,", "").replace("carryadd=false","carryadd=true") for p in mul_problems]))
-
-    os.system('pdflatex example.tex')
-    time.sleep(1)
-    os.system('cp example.pdf solution.pdf')
+    r = subprocess.check_call(['pdflatex', 'example.tex'])
+    r = subprocess.check_call(['cp', 'example.pdf', 'solution.pdf'])
 
 if __name__ == "__main__":
     main()
