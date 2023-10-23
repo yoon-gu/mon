@@ -12,13 +12,21 @@ def add_problem(lower, upper):
     solution = input1 + input2
     return {"input1": input1, "input2": input2, "solution": solution}
 
+def subtract_problem(lower, upper):
+    input1 = random.randint(lower, upper)
+    input2 = -random.randint(lower, upper)
+    solution = input1 + input2
+    return {"input1": input1, "input2": input2, "solution": solution}
+
 def multiply_problem(lower, upper):
     input1 = random.randint(lower, upper)
     input2 = random.randint(lower, upper)
     solution = input1 + input2
     return {"input1": input1, "input2": input2, "solution": solution}
 
-problem_set = {"더하기": (add_problem, TEMPLATE), "곱하기": (multiply_problem, MULT_TEMPLATE)}
+problem_set = {"더하기": (add_problem, TEMPLATE),
+               "빼기": (subtract_problem, TEMPLATE),
+               "곱하기": (multiply_problem, MULT_TEMPLATE)}
 
 @click.command()
 @click.option('--num_problems', default=10)

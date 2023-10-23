@@ -4,7 +4,7 @@ import gradio as gr
 from make_problems import problem_set
 from copy import deepcopy
 
-types = gr.Dropdown(["더하기", "곱하기"], value="더하기", label="Problem Type", multiselect=True)
+types = gr.Dropdown(["더하기", "빼기", "곱하기"], value=["더하기", "빼기", "곱하기"], label="Problem Type", multiselect=True)
 lower = gr.Slider(minimum=1, maximum=10000, step=1, value=1000, label="Lower Bound")
 upper = gr.Slider(minimum=1, maximum=10000, step=1, value=9999, label="Upper Bound")
 num_problems = gr.Slider(minimum=1, maximum=100, step=1, value=30, label="Number of Problems")
