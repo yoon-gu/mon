@@ -41,7 +41,9 @@ def greet(type, lower, upper, num_problems):
     r = subprocess.check_call(['pdflatex', 'problem.tex'])
     all_chapter_str_sol = deepcopy(all_chapter_str)
     with open('chapters.tex', 'w') as f:
-        f.write(all_chapter_str_sol.replace("resultstyle=\placeholder,", "").replace("carryadd=false","carryadd=true").replace("carrysub=false","carrysub=true"))
+        f.write(all_chapter_str_sol.replace(",intermediarystyle=\placeholder", "").replace("resultstyle=\placeholder,", "").replace("carryadd=false","carryadd=true").replace("carrysub=false","carrysub=true"))
+
+    time.sleep(1)
     r = subprocess.check_call(['pdflatex', 'solution.tex'])
     return ["problem.pdf", "solution.pdf"]
 

@@ -11,7 +11,7 @@
 \renewcommand{\familydefault}{\sfdefault}
 \newcommand\placeholder[1]{}
 \newcommand\placeholders[1]{\scriptsize$\square$}
-
+\renewcommand{\chaptername}{장}
 \makepagestyle{standard} % Make standard pagestyle
 
 \makeatletter                 % Define standard pagestyle
@@ -38,6 +38,14 @@
 \chapterstyle{ger}
 \title{황-구몬학습}
 
+\usepackage{etoolbox}
+
+\makeatletter
+\patchcmd{\@makechapterhead}
+ {\printchaptername\chapternamenum\printchapternum}
+ {\printchapternum\chapternamenum\printchaptername}
+ {}{}
+\makeatother
 \begin{document}
 % \maketitle
 % \longdivision{350}{5}
